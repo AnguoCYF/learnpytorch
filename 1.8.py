@@ -34,7 +34,7 @@ class NeuralNetwork(nn.Module):
             nn.Linear(512, 10),
         )
 
-    def foward(self, x):
+    def forward(self, x):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
@@ -103,7 +103,7 @@ def test_loop(dataloader, model, loss_fn):
 
 
 for t in range(epochs):
-    print(f"Epoch {t + 1}\n-----------------------------")
+    print(f"Epoch {t+1}\n-------------------------------")
     train_loop(train_dataloader, model, loss_fn, optimizer)
     test_loop(test_dataloader, model, loss_fn)
 print("Done!")
