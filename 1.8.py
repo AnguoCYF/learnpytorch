@@ -48,7 +48,7 @@ model = NeuralNetwork()
 # 3、学习率
 learning_rate = 1e-3
 batch_size = 64
-epochs = 10
+epochs = 30
 
 # 优化Loop
 # 通过优化Loop来训练和优化模型，优化循环的每一次迭代称为一个epoch。
