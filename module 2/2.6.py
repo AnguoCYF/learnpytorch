@@ -72,9 +72,31 @@ if __name__ == '__main__':
     total = 0
 
     # since we're not training, we don't need to calculate the gradients for our outputs
+    # with torch.no_grad():
+    #     for data in testloader:
+    #         images, labels = data
+    #     #  calculate outputs by running images through the network
+    #     outputs = net(images)
+    #     #  the class with the highest energy is what we choose as prediction
+    #     _, predicted = torch.max(outputs.data, 1)
+    #     total += labels.size(0)
+    #     correct += (predicted == labels).sum().item()
+    # print('Accuracy of the network on the 10000 test images: %d %%' % (
+    #         100 * correct / total))
+
+
+    # prepare to count predictions for each class
+    correct_pred = {classname: 0 for classname in classes}
+    total_pred = {classname: 0 for classname in classes}
+
+    # agaain no gadients needed
     with torch.no_grad():
         for data in testloader:
             images, labels = data
-        #  calculate outputs by running images through the network
-        outputs = net(images)
-        #  the class with the highest energy is what we choose as prediction
+            outputs = net(images)
+            _, preditions = torch.max(outputs, 1)
+            #collect the correct predictions for each class
+            for label, predition in zip(labels,preditions):
+                if label == predition:
+                    correct_pred[classes[label]] += 1
+                total_pred[classes[label]] += 1
