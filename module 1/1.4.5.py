@@ -43,8 +43,8 @@ class CustomImageDataSet(Dataset):
         return image, label
 
 
-train_dataloader = DataLoader(training_data, batch_size=64, shuffle=True)
-test_dataloader = DataLoader(test_data, batch_size=64, shuffle=True)
+train_dataloader = DataLoader(training_data, batch_size=32, shuffle=True)
+test_dataloader = DataLoader(test_data, batch_size=32, shuffle=True)
 
 # Display image and label.
 train_feature, train_labels = next(iter(train_dataloader))
@@ -52,7 +52,10 @@ print(f"feature batch shape:{train_feature.size()}")
 print(f"labels batch shape:{train_labels.size()}")
 img = train_feature[0].squeeze()
 label = train_labels[0]
-plt.imshow(img, cmap="gray")
-plt.show()
+# plt.imshow(img, cmap="gray")
+# plt.show()
 print(f"Label:{label}")
-
+for i, data in enumerate(trainloader, 0):
+    # get the inputs; data is a list of [inputs, labels]
+    inputs, labels = data
+    print(data)
